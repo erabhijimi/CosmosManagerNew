@@ -1,0 +1,30 @@
+yum install git
+wget https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+tar -xvzf apache-maven-3.8.1-bin.tar.gz
+mv apache-maven-3.8.1 maven3
+//Set PATH
+vi .bash_profile===
+MVN_HOME=/opt/maven3
+PATH=$MVN_HOME/bin:$PATH
+==
+source .bash_profile
+mvn --version
+To install Jenkins on Linux---------------------------------------------------------------------------------------------
+https://www.youtube.com/watch?v=jmm8DsosBqw&t=205s
+yum update
+Download latest Jenkins code package
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum install jenkins
+systemctl start jenkins
+cat /var/lib/jenkins/secrets/initialAdminPassword
+Run Jenkins on a Different Port other than 8080-----------------------------------------------------------------
+vi /etc/sysconfig/jenkins
+restart jenkins:: systemctl restart jenkins
+Edit inbound rules for the port to access everywhere.
+
+ To uninstall Jenkins
+ sudo service jenkins stop
+ sudo yum remove jenkins
+ sudo rm -r /var/lib/jenkins

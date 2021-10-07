@@ -1,0 +1,14 @@
+1.Clone service discovery
+2.clone cloud gateway
+3.clone login service
+
+mvn clean to download all dependency.
+mvn lifecycle?? clean,build,install etc..
+
+
+http://localhost:8761/
+
+4.clone Hystrix-dashboard
+http://localhost:9195/hystrix
+check 
+http://localhost:9191/actuator/hystrix.stream

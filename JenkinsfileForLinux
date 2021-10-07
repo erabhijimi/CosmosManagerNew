@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    environment{
+            PATH = "/opt/maven3/bin:$PATH"
+    }
+    stages{
+        stage("Startup"){
+            steps{
+                echo "Welcome Abhijit..."
+            }
+        }
+        stage('Build service-discovery') {
+            steps {
+                sh 'mvn -f service-discovery/pom.xml clean install'
+            }
+        }
+        stage('Copy service-discovery') {
+            steps {
+                         sh 'mv service-discovery/target/service-discovery.jar /opt/jars'
+                     }
+                 }
+    }
+}

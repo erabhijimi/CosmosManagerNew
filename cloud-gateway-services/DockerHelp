@@ -1,0 +1,7 @@
+<finalName>service-discovery</finalName> inside build tag
+mvn clean install
+docker build -f Dockerfile -t cloud-gateway .
+docker images
+docker run -p 9191:9191 cloud-gateway
+docker container ls
+docker stop ee1b12251a3b

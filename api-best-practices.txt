@@ -1,0 +1,19 @@
+Here are the 9 best practices you should consider when preparing the REST API.
+
+1. Use JSON -
+2. Use Nouns instead of Verbs - 
+Ex:Verbs for Get/Put/Post
+Nouns like createUser/books/ etc..
+
+3. Name the collections using Plural Nouns - 5:06
+4. Use resource nesting - 6:05
+5. Error Handling - 7:25
+6. Filtering, sorting, paging, and field selection - 8:21
+7. Versioning - 10:53
+8. API Documentation - 12:23
+9. Using SSL/TLS - 13:56
+
+
+
+
+ssh -q hostaddr<lcmapp-stg-01/02>

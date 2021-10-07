@@ -1,0 +1,32 @@
+server:
+  port: 9195
+spring:
+  profiles:
+    active: house-dev
+  main:
+    banner-mode: off
+  application:
+    name: quick-service
+eureka:
+  client:
+    register-with-eureka : true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone : ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost
+
+---
+spring:
+  profiles: house-dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/dev?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: password
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect

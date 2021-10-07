@@ -1,0 +1,111 @@
+server:
+  port: 9191
+spring :
+  application :
+    name : cloud-gateway
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      routes:
+        - id: LOGIN-SERVICE
+          uri: lb://LOGIN-SERVICE
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: LOGIN-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: USER-CONTACTS-SERVICE
+          uri: lb://USER-CONTACTS-SERVICE
+          predicates:
+            - Path=/contact/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: USER-CONTACTS-SERVICE
+                fallbackuri: forward:/contactFallback
+        - id: PRODUCTS-SERVICE
+          uri: lb://PRODUCTS-SERVICE
+          predicates:
+            - Path=/product/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: PRODUCTS-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: CARTS-SERVICE
+          uri: lb://CARTS-SERVICE
+          predicates:
+            - Path=/cart/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CARTS-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: ADDRESS-SERVICE
+          uri: lb://ADDRESS-SERVICE
+          predicates:
+            - Path=/address/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ADDRESS-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: INVOICE-SERVICE
+          uri: lb://INVOICE-SERVICE
+          predicates:
+            - Path=/invoice/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: INVOICE-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: INVENTORY-SERVICE
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: INVENTORY-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ORDER-SERVICE
+                fallbackuri: forward:/loginFallback
+        - id: QUICK-SERVICE
+          uri: lb://QUICK-SERVICE
+          predicates:
+            - Path=/quick/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: QUICK-SERVICE
+                fallbackuri: forward:/loginFallback
+eureka:
+  client:
+    register-with-eureka : true
+    fetch-registry: true
+    serviceUrl:
+     defaultZone : ${EUREKA_SERVER:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000

@@ -1,0 +1,7 @@
+<finalName>service-discovery</finalName> inside build tag
+mvn clean install
+docker build -f Dockerfile -t service-discovery .
+docker images
+docker run -p 8761:8761 service-discovery
+docker container ls
+docker stop ee1b12251a3b

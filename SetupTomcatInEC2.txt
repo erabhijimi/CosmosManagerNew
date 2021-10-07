@@ -1,0 +1,61 @@
+install java
+download tomcat package
+copy to opt
+add users
+change port
+restart tomcat
+enable tomcat access to the world 
+
+//Login to ur box by using Putty
+1.install java---------------------------------------------------------------------------------------------
+[root@ip-172-31-34-236 ec2-user]# java -version
+openjdk version "1.8.0_302"
+OpenJDK Runtime Environment (build 1.8.0_302-b08)
+OpenJDK 64-Bit Server VM (build 25.302-b08, mixed mode)
+[root@ip-172-31-34-236 ec2-user]# whereis java
+java: /usr/bin/java /usr/lib/java /etc/java /usr/share/java /usr/share/man/man1/java.1.gz
+[root@ip-172-31-34-236 ec2-user]#
+
+/usr/sbin/alternatives --config java			//To select from multiple java versions
+2.download tomcat package----------------------------------------------------------------------------------
+yum install wget
+
+copy link::https://downloads.apache.org/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50.tar.gz
+i.e.::wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50.tar.gz
+tar -xvzf apache-tomcat-9.0.50.tar.gz
+mv apache-tomcat-9.0.50 tomcat
+cd /opt/tomcat/bin/
+./startup.sh
+
+ ps -ef | grep tomcat
+root      3373     1  5 01:27 pts/1    00:00:02 //bin/java -Djava.util.logging.config.file=/opt/tomcat/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -Dignore.endorsed.dirs= -classpath /opt/tomcat/bin/bootstrap.jar:/opt/tomcat/bin/tomcat-juli.jar -Dcatalina.base=/opt/tomcat -Dcatalina.home=/opt/tomcat -Djava.io.tmpdir=/opt/tomcat/temp org.apache.catalina.startup.Bootstrap start
+root      3402  3339  0 01:27 pts/1    00:00:00 grep --color=auto tomcat
+
+Create a Softlink---------------------------------------------------------------------------------------------
+[root@ip-172-31-34-236 bin]# echo $PATH
+/sbin:/bin:/usr/sbin:/usr/bin
+
+[ec2-user@ip-172-31-34-236 ~]$ echo $PATH
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ec2-user/.local/bin:/home/ec2-user/bin
+
+ln -s /opt/tomcat/bin/startup.sh path/name
+ln -s /opt/tomcat/bin/startup.sh /usr/bin/up
+ln -s /opt/tomcat/bin/shutdown.sh /usr/bin/down
+now u can start/stop tomcat using up/down
+ln -s /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatup
+ln -s /opt/tomcat/bin/shutdown.sh /usr/local/bin/tomcatdown
+chown ec2-user:ec2-user /opt/tomcat/bin/startup.sh
+
+ls -l /opt/tomcat/bin/startup.sh /usr/local/bin/tomcatup
+Change tomcat port--------------------------------------------------------------------------------------------
+vi /opt/tomcat/conf/server.xml
+change the default port and restart tomcat 
+
+To access the manager app of Tomcat--------------------------------------------------------------------------
+find / -name "context.xml"
+and comment out the value field :  <!--		//		-->
+To add users and roles for tomcat--------------------------------------------------------------------------------------
+vi /opt/tomcat/conf/tomcat-users.xml
+
+
+
