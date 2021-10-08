@@ -16,7 +16,7 @@ public class Product {
     private String  productCategory;
     private String  productType;
     private String  productBrand;
-    private int productUnit;
+    private String productUnit;
     private int productAmount;
     private int productMRP;
     private int productRealPrice;

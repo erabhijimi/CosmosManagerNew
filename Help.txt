@@ -12,3 +12,24 @@ http://localhost:8761/
 http://localhost:9195/hystrix
 check 
 http://localhost:9191/actuator/hystrix.stream
+
+AddingZipkin and sleuth for distributed tracing,
+https://zipkin.io/pages/quickstart.html		download latest jar
+java -jar zipkin*.jar 
+http://127.0.0.1:9411/					//open this url
+
+add dependency,
+<dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+update the properties with this,
+spring:
+  application:
+    name: quick-service
+  zipkin:
+    baseUrl: http://127.0.0.1:9411/zipkin/
