@@ -1,9 +1,6 @@
 package com.cosmos.service;
 
-import com.cosmos.pojo.Inventory;
-import com.cosmos.pojo.Product;
-import com.cosmos.pojo.Purchase;
-import com.cosmos.pojo.Products;
+import com.cosmos.pojo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +17,7 @@ public class ProductService {
 
     private String productUrl="http://PRODUCTS-SERVICE/product/";
     private String inventoryUrl="http://INVENTORY-SERVICE/inventory/";
+    private String  addressUrl = "http://ADDRESS-SERVICE/address/";
 
     public Optional<Purchase> getProductById(int productId) {
         return null;
@@ -36,9 +34,17 @@ public class ProductService {
         Inventory oldInventory = purchase.getInventoryCreate();
         oldInventory.setProductId(newProduct.getProductId());
         Inventory newInventory = createAndSave(oldInventory);
+        Address address=createAndSaveAddress(purchase.getCustId(),purchase.getCustAddress());
         log.info(newInventory.toString());
         return null;
     }
+
+    private Address createAndSaveAddress(Long custId, Address custAddress) {
+        custAddress.setCustId(custId);
+        log.info("Going to save the address for user :"+custId);
+        return restTemplate.postForObject(addressUrl,custAddress, Address.class);
+    }
+
     private Inventory createAndSave(Inventory inventory){
         inventory.setPurchaseDate(LocalDate.now());
         String duration = inventory.getBestBeforeDays();
