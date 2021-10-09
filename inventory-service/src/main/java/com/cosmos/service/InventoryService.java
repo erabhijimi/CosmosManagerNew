@@ -47,6 +47,7 @@ public class InventoryService {
     }
 
     public Inventory saveInventory(Inventory inventory) {
+        log.info("New Log for saveInventory : "+inventory.toString());
         LocalDate today = LocalDate.now();
         inventory.setPurchaseDate(today);
         Inventory newInventory = inventoryRepository.save(inventory);
