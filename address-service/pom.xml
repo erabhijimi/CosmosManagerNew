@@ -80,6 +80,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>address-service</finalName>
 	</build>
 
 </project>

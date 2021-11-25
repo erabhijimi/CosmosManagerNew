@@ -81,6 +81,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>quick-service</finalName>
 	</build>
 
 </project>

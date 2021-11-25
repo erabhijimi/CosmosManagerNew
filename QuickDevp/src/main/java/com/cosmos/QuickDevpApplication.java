@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class QuickDevpApplication {
+public class  QuickDevpApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(QuickDevpApplication.class, args);

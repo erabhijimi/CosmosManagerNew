@@ -1,0 +1,8 @@
+Must have to login
+1.Clone service discovery
+2.clone cloud gateway
+3.clone login service
+
+mvn clean to download all dependency.
+
+4.
